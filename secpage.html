@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watch movies</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/fontawesome.min.css">
+
+</head>
+
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        background-color: #020202dc;
+    }
+    /*here New Css code*/
+    
+    html {
+        font-size: 16px;
+    }
+    
+    .flex {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 0 1%;
+    }
+    
+    .inner {
+        max-width: 95%;
+        margin: 0 auto;
+        padding: 1%;
+    }
+    
+    .container {
+        width: 100%;
+        height: 100vh;
+        position: relative;
+    }
+    
+    .navigation {
+        width: 100%;
+        background-color: black;
+    }
+    
+    .left-nav {
+        width: 70%;
+        align-items: center;
+        justify-content: flex-start;
+    }
+    
+    .logo img {
+        width: 110px;
+    }
+    
+    .navbar {
+        width: 85%;
+    }
+    
+    ul li {
+        color: #fff;
+        list-style: none;
+        font-size: 1rem;
+        margin-right: 40px;
+    }
+    
+    .logo {
+        width: 15%;
+    }
+    
+    .menu {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+    
+    .right-nav {
+        width: 30%;
+        align-items: center;
+        justify-content: flex-end;
+    }
+    
+    .right-nav img {
+        width: 50px;
+        border-radius: 5px;
+    }
+    
+    .fa {
+        color: #fff;
+        margin: 0 15px;
+        font-size: 1.1rem;
+    }
+    
+    .right-nav p {
+        display: inline;
+        margin-left: 5px;
+        font-size: 1rem;
+    }
+    
+    .banner {
+        height: auto;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        color: #fff;
+        padding-top: 100px;
+    }
+    
+    .banner h1 {
+        font-size: 5rem;
+        background: linear-gradient(to right, #f32170, #be421c, #cf23cf, #cc6b33);
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+    }
+    
+    .banner h3 {
+        font-size: 2rem;
+        margin-top: 20px;
+        letter-spacing: 3px;
+        font-weight: 300;
+        text-transform: capitalize;
+    }
+    
+    .banner .heading {
+        font-style: italic;
+        padding: 0px 20px;
+    }
+    
+    .banner .banner-code {
+        font-size: 15rem;
+        font-weight: 900;
+    }
+    
+    .banner-button {
+        justify-content: flex-start;
+        padding: 0;
+    }
+    
+    .banner .btn {
+        padding: 12px 18px;
+        font-size: 1rem;
+        margin: 50px 10px 0 11px;
+        color: black;
+        font-weight: 500;
+        border: none;
+        border-radius: 3px;
+        background-color: #fff;
+    }
+    
+    .banner .btn1 {
+        background-color: rgba(255, 255, 255, 0.5);
+        color: #fff;
+    }
+    
+    .play {
+        color: black;
+        margin: 0 5px;
+    }
+    
+    .info {
+        color: #fff;
+    }
+    
+    .video-container {
+        width: 100%;
+        height: 100vh;
+        position: absolute;
+        z-index: -6;
+        left: 0;
+        top: 0;
+    }
+    
+    .video-container video {
+        width: 100%;
+        height: 100vh;
+        object-fit: cover;
+    }
+    
+    .color-overplay {
+        width: 100%;
+        height: 100vh;
+        background-color: #000;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0.5;
+    }
+    
+    .carousel {
+        width: 93%;
+        position: absolute;
+        bottom: 0;
+        overflow: hidden;
+        border-radius: 20px;
+        padding: 0 1%;
+    }
+    
+    .carousel h3 {
+        color: #fff;
+        font-size: 1.5rem;
+    }
+    
+    .carousel-slider {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 250px;
+        padding: 0 50px;
+    }
+    
+    .carousel-list {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        padding: 0 50px;
+    }
+    
+    .carousel-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 300px;
+        height: 100px;
+        border-radius: 5px;
+        box-sizing: border-box;
+        margin: 0 7px;
+        object-fit: fill;
+        cursor: pointer;
+    }
+    
+    .carousel-item img {
+        width: 100%;
+        height: 180px;
+        border-radius: 5px;
+    }
+    
+    .togglebtn {
+        display: none;
+        font-size: 30px;
+        background-color: transparent;
+        border: none;
+        outline: none;
+        color: #0094da;
+    }
+    
+    @media only screen and (max-width:1150px) {
+        .banner h1 {
+            font-size: 3.8rem;
+        }
+        .navbar {
+            width: 100%;
+            display: none;
+        }
+        .left-nav,
+        .right-nav {
+            width: 100%;
+            justify-content: flex-start;
+            margin: 20px 0;
+        }
+        ul li {
+            margin-right: 30px;
+        }
+        .togglebtn {
+            display: block;
+            font-size: 2rem;
+            color: #fff;
+            margin-top: 18px;
+            position: absolute;
+            right: 20px;
+        }
+    }
+    
+    .point {
+        cursor: pointer;
+    }
+    
+    @media only screen and (max-width:768px) {
+        .banner h1 {
+            font-size: 3rem;
+        }
+        .banner {
+            padding: 50px;
+        }
+    }
+    
+    @media only screen and (max-width:550px) {
+        .banner h1 {
+            font-size: 3rem;
+        }
+        .menu {
+            flex-direction: column;
+        }
+        ul li {
+            margin-bottom: 10px;
+        }
+    }
+    
+    .container-sec {
+        height: 100vh;
+        width: 100vw;
+    }
+    
+    .first {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        margin-top: 80px;
+    }
+    
+    .second {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin-top: 200px;
+    }
+    
+    .third {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin-top: 200px;
+    }
+    /*COde for footer*/
+    
+    .member-info h1 span {
+        color: #e74c3c;
+    }
+    
+    .member-card {
+        text-align: center;
+        padding-top: 50px;
+        width: 50%;
+        margin: auto;
+    }
+    
+    .member-card p {
+        margin: 20px 0px;
+        line-height: 2em;
+    }
+    
+    .member-card h2 {
+        margin: 20px 0px;
+    }
+    
+    .m-images {
+        width: 100%;
+        display: flex;
+        margin: 20px 0px;
+        overflow: hidden;
+    }
+    
+    .m-images img {
+        width: 250px;
+        height: 200px;
+        cursor: pointer;
+        transition: 0.4s ease-in-out;
+    }
+    
+    .m-images img:hover {
+        transform: scale(1.8);
+    }
+    
+    footer {
+        width: 100%;
+        height: 100vh;
+        background: #262626;
+        padding: 50px 100px;
+        margin-top: 100px;
+    }
+    
+    .newsletter {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: wheat;
+    }
+    
+    .newsletter>div {
+        flex-basis: 50%;
+    }
+    
+    .ntext {
+        text-align: right;
+    }
+    
+    .newsletter h2 {
+        font-size: 2em;
+        font-family: sans-serif;
+    }
+    
+    .newsletter p {
+        font-size: 20px;
+        margin-top: 10px;
+    }
+    
+    .newsletter label {
+        position: relative;
+    }
+    
+    .newsletter input {
+        padding: 20px;
+        width: 70%;
+        border-radius: 8px;
+        border: none;
+        outline: none;
+        font-family: sans-serif;
+    }
+    
+    .newsletter button {
+        position: absolute;
+        right: 0px;
+        padding: 20px;
+        width: 30%;
+        background-color: #e74c3c;
+        color: white;
+        border: none;
+        outline: none;
+        border-radius: 0px 8px 8px 0px;
+    }
+    
+    .f-contact {
+        color: antiquewhite;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 3em;
+        border-bottom: 1px solid rgb(255, 255, 255, 0.2);
+    }
+    
+    .f-contact>div {
+        flex-basis: 20%;
+    }
+    
+    .f-contact p {
+        line-height: 2em;
+        font-size: 20px;
+        color: grey;
+        cursor: pointer;
+    }
+    
+    .f-contact p:hover {
+        color: white;
+    }
+    
+    .f-contact i {
+        background: white;
+        color: black;
+        padding: 15px;
+        font-size: 16px;
+        margin: 20px 5px;
+        border-radius: 50%;
+        transition: 0.4s ease;
+    }
+    
+    .f-contact i:hover {
+        background: transparent;
+        color: white;
+        border: 1px solid white;
+        cursor: pointer;
+    }
+    
+    footer {
+        margin-top: 1100px;
+    }
+</style>
+
+<body>
+
+    <div class="navigation flex">
+        <div class="logo">
+            <img src="netflix-logo-png-2574.png" alt="">
+        </div>
+
+        <div class="navbar flex" id="navbar">
+            <div class="left-nav flex">
+                <ul class="flex menu">
+                    <a href="Netf.html" target="new">
+                        <li class="point">Home</li>
+                    </a>
+                    <li class="point">Tv shows</li>
+                    <li class="point">Movies</li>
+                    <li class="point">New & popular</li>
+                    <li class="point">My list</li>
+                </ul>
+            </div>
+
+
+
+
+            <div class="right-nav flex">
+                <span class="fa fa-search" aria-hidden="true">
+                    <p class="point">Children</p>
+                </span>
+                <span class="fa fa-bell-o fa" aria-hidden="true"></span>
+                <img src="man-12323.png" alt="">
+                <span class="fa fa-caret-down fa" aria-hidden="true"></span>
+            </div>
+
+        </div>
+
+        <span class="togglebtn" onclick="toggle()">&#9776;</span>
+
+    </div>
+
+
+
+
+    <div class="container-sec">
+        <div class="first">
+            <video src="movies/Yeh.Jawaani.Hai.Deewani.2013.720p.BluRay.x264-.mkv" controls height="500px" width="800px"></video>
+            <video src="movies/Hera Pheri 2000 AMZN WebRip 720p Hindi x264 AAC ESub - [10xmovies.in].mkv" height="500px" width="800px" controls></video>
+        </div>
+        <div class="second">
+            <video src="movies/INTO THE WILD (2007) Hin-Eng.mkv" controls height="500px" width="800px"></video>
+            <video src="movies/John Wick Chapter 2 ( 720p x264  Dual Audio.mp4" controls height="500px" width="800px"></video>
+        </div>
+
+        <div class="third">
+            <video src="movies/Kung.Fu Panda 3 (2016) 720p [Hin+Eng] ORG.mkv" controls height="500px" width="800px"></video>
+            <video src="movies/Batman Ninja (2018).mkv" controls height="500px" width="800px"></video>
+        </div>
+    </div>
+
+
+    <div>
+        <footer>
+            <div class="newsletter">
+                <div>
+                    <h2>Subscribe our newsletter</h2>
+                    <p>We are a team of non cynics who truly care for our work</p>
+                </div>
+
+                <div class="ntext">
+                    <label for="">
+                            <input type="text" placeholder="Enter your Email">
+                            <button>Subscribe</button>
+                        </label>
+                </div>
+            </div>
+
+
+            <div class="f-contact">
+                <div>
+                    <h1>Information</h1>
+                    <p>Netflix is one of the world's leading entertainment services with 270 million paid memberships in over 190 countries enjoying TV series, films and games across a wide variety of genres and languages.</p>
+                    <a href="https://www.whatsapp.com/" target="new"> <i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="https://www.instagram.com/"> <i class="fa-brands fa-instagram"></i></a>
+                    <i class="fa-brands fa-telegram"></i></a>
+                    <i class="fa-brands fa-twitter"></i></a>
+                </div>
+
+                <div>
+                    <h1>Useful links</h1>
+                    <a href="https://about.netflix.com/en" target="new">
+                        <p>About</p>
+                    </a>
+                    <p>Movie reviews</p>
+                    <p>Blog posts</p>
+                    <a href="Netf.html" target="new">
+                        <p>Home page</p>
+                    </a>
+                </div>
+
+                <div>
+                    <h1>Details</h1>
+                    <p>Diffrent chanels</p>
+                    <p>Posts</p>
+                    <a href="https://about.netflix.com/en" target="new">
+                        <p>About</p>
+                    </a>
+                    <p>Pricing plans</p>
+                </div>
+
+                <div>
+
+                    <h1>Help & Support</h1>
+                    <p>Privacy policy</p>
+                    <p>Terms & condition</p>
+                    <p>Technical support</p>
+                    <p>Costomer care</p>
+                </div>
+
+
+            </div>
+
+        </footer>
+    </div>
+
+
+</body>
+
+</html>
